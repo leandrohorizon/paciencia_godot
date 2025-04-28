@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3 uid="uid://o7wyi6t7b23g"]
+
+[ext_resource type="Script" uid="uid://bgbayvrt88x3k" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://cdvvg7tfyf6ci" path="res://pile.tscn" id="2_0xm2m"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_ig7tw")
+
+[node name="deck" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(192, 120)
+metadata/pile_type = "deck"
+
+[node name="waste" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(322, 120)
+metadata/pile_type = "waste"
+
+[node name="foundation1" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(576, 120)
+metadata/pile_type = "foundation"
+
+[node name="foundation2" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(704, 120)
+metadata/pile_type = "foundation"
+
+[node name="foundation3" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(832, 120)
+metadata/pile_type = "foundation"
+
+[node name="foundation4" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(960, 120)
+metadata/pile_type = "foundation"
+
+[node name="tableau1" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(192, 307)
+metadata/pile_type = "tableau"
+
+[node name="tableau2" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(322, 307)
+metadata/pile_type = "tableau"
+
+[node name="tableau3" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(448, 307)
+metadata/pile_type = "tableau"
+
+[node name="tableau4" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(576, 307)
+metadata/pile_type = "tableau"
+
+[node name="tableau5" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(704, 307)
+metadata/pile_type = "tableau"
+
+[node name="tableau6" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(832, 307)
+metadata/pile_type = "tableau"
+
+[node name="tableau7" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(960, 307)
+metadata/pile_type = "tableau"

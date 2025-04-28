@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdvvg7tfyf6ci"]
+
+[ext_resource type="Script" uid="uid://b7yk2e46nfmy4" path="res://pile.gd" id="1_rnvat"]
+[ext_resource type="Texture2D" uid="uid://dxyppy7t0uh73" path="res://assets/card-blank.png" id="2_1o32j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rnvat"]
+size = Vector2(100, 150)
+
+[node name="pile" type="Node2D"]
+script = ExtResource("1_rnvat")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_rnvat")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+texture = ExtResource("2_1o32j")
