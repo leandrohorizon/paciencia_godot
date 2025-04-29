@@ -48,7 +48,7 @@ func set_child(card):
 		card.position.y = 0
 
 	if self.parent_pile.get_meta("pile_type") == "tableau":
-		card.position.y = 25
+		card.position.y = 40
 
 	card.parent.remove_child(card)
 	self.add_child(card)
