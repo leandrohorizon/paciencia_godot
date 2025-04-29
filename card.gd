@@ -42,3 +42,15 @@ func set_parent(parent):
 	
 func set_parent_pile(pile):
 	self.parent_pile = pile
+
+func turn_up():
+	self.is_face_up = true
+	var sprite = $Area2D/Sprite2D
+	var image_path = "res://assets/card-%s-%d.png" % [suit, value]
+	sprite.texture = load(image_path)
+
+func turn_down():
+	self.is_face_up = false
+	var sprite = $Area2D/Sprite2D
+	var image_path = "res://assets/card-back1.png"
+	sprite.texture = load(image_path)

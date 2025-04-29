@@ -32,7 +32,13 @@ func deliver_in_tableaus() -> void:
 
 	for tableau in tableaus:
 		for index in range(0, quantity):
-			tableau.add_child(deck.pop_back())
+			var card = deck.pop_back()
+			tableau.add_child(card)
+			card.position.y = index * 10
+
+			if index == quantity - 1:
+				card.turn_up()
+		
 		quantity = quantity + 1
 
 func deliver_in_deck() -> void:
