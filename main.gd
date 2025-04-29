@@ -40,6 +40,7 @@ func deliver_in_tableaus() -> void:
 			var card = deck.pop_back()
 			target.add_child(card)
 			card.set_parent_pile(tableau)
+			card.set_parent(target)
 			
 			card.z_index = index + 1
 

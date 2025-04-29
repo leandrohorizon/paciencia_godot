@@ -20,6 +20,10 @@ func _ready() -> void:
 func _on_area2d_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		get_viewport().set_input_as_handled()
+
+		if !self.is_face_up:
+			return
+
 		print("Objeto clicado: ", self.to_str())
 		
 		var main = get_node("/root/Main")
@@ -37,10 +41,21 @@ func set_child(card):
 	if !validate_new_child(card):
 		return
 
+	if card.parent != card.parent_pile:
+		card.parent.turn_up()
+
+	if self.parent_pile.get_meta("pile_type") == "foundation":
+		card.position.y = 0
+
+	if self.parent_pile.get_meta("pile_type") == "tableau":
+		card.position.y = 25
+
+	card.parent.remove_child(card)
+	self.add_child(card)
+	
 	self.child = card
 	card.set_parent(self)
 	card.set_parent_pile(self.parent_pile)
-	self.add_child(card)
 
 func validate_new_child(new_child):
 	if parent_pile.get_meta("pile_type") == "foundation":
