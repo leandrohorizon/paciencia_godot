@@ -11,6 +11,17 @@ func setup(value, suit):
 	self.value = value
 	self.suit = suit
 
+func _ready() -> void:
+	var viewport = get_viewport()
+	viewport.physics_object_picking_sort = true
+	viewport.physics_object_picking_first_only = true
+	$Area2D.input_event.connect(_on_area2d_input_event)
+
+func _on_area2d_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		get_viewport().set_input_as_handled()
+		print("Objeto clicado: ", self.to_str())
+
 func set_child(card):
 	if !validate_new_child(card):
 		return
