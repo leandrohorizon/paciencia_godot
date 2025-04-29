@@ -28,12 +28,8 @@ func _on_area2d_input_event(viewport, event, shape_idx):
 				var target = waste.last_child()
 
 				self.position.y = 0
-				self.parent.remove_child(self)
-				target.add_child(self)
 				
-				target.child = self
-				self.set_parent(target)
-				self.set_parent_pile(target)
+				target.append_child(self)
 			return
 
 		print("Objeto clicado: ", self.to_str())
@@ -62,10 +58,17 @@ func set_child(card):
 	if self.parent_pile.get_meta("pile_type") == "tableau":
 		card.position.y = 40
 
+	append_child(card)
+
+func append_child(card):
 	card.parent.remove_child(card)
 	self.add_child(card)
 	
+	print("parent: ", self)
+	print("parent_pile: ", self.parent_pile)
+
 	self.child = card
+	card.parent.child = null
 	card.set_parent(self)
 	card.set_parent_pile(self.parent_pile)
 

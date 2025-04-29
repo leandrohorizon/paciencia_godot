@@ -1,13 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://o7wyi6t7b23g"]
+[gd_scene load_steps=4 format=3 uid="uid://o7wyi6t7b23g"]
 
 [ext_resource type="Script" uid="uid://bgbayvrt88x3k" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cdvvg7tfyf6ci" path="res://pile.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://cjta5rukj8j0l" path="res://pile_deck.gd" id="3_h2yge"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ig7tw")
 
 [node name="deck" parent="." instance=ExtResource("2_0xm2m")]
 position = Vector2(192, 120)
+script = ExtResource("3_h2yge")
 metadata/pile_type = "deck"
 
 [node name="waste" parent="." instance=ExtResource("2_0xm2m")]

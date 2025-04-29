@@ -11,26 +11,39 @@ func _ready() -> void:
 func _on_area2d_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		get_viewport().set_input_as_handled()
-
-		var main = get_node("/root/Main")
-
-		if main.card_selected == null:
-			return
 		
-		var card = main.card_selected
-		self.set_child(card)
-		main.card_selected = null
+		var waste = get_node("/root/Main/waste")
+		var source = waste.last_child()
+		
+		pegar_de_volta_carta_pai(source, self)
 
-func set_child(card):
-	if !validate_new_child(card):
+	var main = get_node("/root/Main")
+
+	if main.card_selected == null:
+		return
+	
+	var card = main.card_selected
+	self.set_child(card)
+	main.card_selected = null
+
+func pegar_de_volta_carta_pai(source, target):
+	if source == get_node("/root/Main/waste"):
 		return
 
-	if card.parent != card.parent_pile:
-		card.parent.turn_up()
+	var old_source = source
+	var old_parent = source.parent
 
-	card.position.y = 0
+	source.turn_down()
+	target.append_child(source)
+	source = old_parent
+
+	if source != null:
+		pegar_de_volta_carta_pai(source, old_source)
+
+func set_child(card):
+	card.turn_down()
 	append_child(card)
-	
+
 func append_child(card):
 	card.parent.remove_child(card)
 	self.add_child(card)
@@ -42,17 +55,7 @@ func append_child(card):
 	card.parent.child = null
 	card.set_parent(self)
 	card.set_parent_pile(self)
-	
 
-func validate_new_child(new_child):
-	if self.get_meta("pile_type") == "foundation":
-		return new_child.value == 1
-	
-	if self.get_meta("pile_type") == "tableau":
-		return new_child.value == 13
-	
-	return false
-	
 func last_child():
 	var target = self
 
@@ -61,3 +64,4 @@ func last_child():
 			return target
 		
 		target = target.child
+	return target
