@@ -21,8 +21,19 @@ func _on_area2d_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		get_viewport().set_input_as_handled()
 		print("Objeto clicado: ", self.to_str())
+		
+		var main = get_node("/root/Main")
+
+		if main.card_selected == null:
+			main.card_selected = self
+		else:
+			var card = main.card_selected
+			self.set_child(card)
+			main.card_selected = null
 
 func set_child(card):
+	print(self.to_str(), " > ", card.to_str(), " = ", validate_new_child(card))
+	
 	if !validate_new_child(card):
 		return
 
