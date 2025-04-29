@@ -55,9 +55,13 @@ func deliver_in_tableaus() -> void:
 		quantity = quantity + 1
 
 func deliver_in_deck() -> void:
+	var target = $deck
+	
 	for card in deck:
-		$deck.add_child(card)
+		target.add_child(card)
 		card.set_parent_pile($deck)
+		card.set_parent(target)
+		target = card
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

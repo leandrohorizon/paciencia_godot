@@ -22,6 +22,16 @@ func _on_area2d_input_event(viewport, event, shape_idx):
 		get_viewport().set_input_as_handled()
 
 		if !self.is_face_up:
+			if self.parent_pile.get_meta("pile_type") == "deck":
+				self.turn_up()
+				var waste = get_node("/root/Main/waste")
+
+				self.position.y = 0
+				self.parent.remove_child(self)
+				waste.add_child(self)
+
+				self.set_parent(waste)
+				self.set_parent_pile(waste)
 			return
 
 		print("Objeto clicado: ", self.to_str())

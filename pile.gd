@@ -12,6 +12,9 @@ func _on_area2d_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		get_viewport().set_input_as_handled()
 		
+		if self.get_meta("pile_type") == "deck":
+			pass
+		
 		var main = get_node("/root/Main")
 
 		if main.card_selected == null:
@@ -43,3 +46,4 @@ func validate_new_child(new_child):
 		return new_child.value == 13
 	
 	return false
+	
