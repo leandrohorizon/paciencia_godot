@@ -45,7 +45,7 @@ func deliver_in_tableaus() -> void:
 			card.z_index = index + 1
 
 			if index > 0:
-				card.position.y = 10
+				card.position.x = 10
 
 			if index == quantity - 1:
 				card.turn_up()

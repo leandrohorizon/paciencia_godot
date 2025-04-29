@@ -4,10 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://dxyppy7t0uh73" path="res://assets/card-blank.png" id="2_1o32j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rnvat"]
-size = Vector2(100, 150)
+size = Vector2(192, 192)
 
 [node name="pile" type="Node2D"]
-position = Vector2(0, 8)
 script = ExtResource("1_rnvat")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -16,4 +15,7 @@ script = ExtResource("1_rnvat")
 shape = SubResource("RectangleShape2D_rnvat")
 
 [node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+texture_filter = 1
+position = Vector2(5.36442e-06, 3.8147e-06)
+scale = Vector2(2, 1.33333)
 texture = ExtResource("2_1o32j")

@@ -8,54 +8,54 @@
 script = ExtResource("1_ig7tw")
 
 [node name="deck" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(192, 120)
+position = Vector2(304, 2184)
 script = ExtResource("3_h2yge")
 metadata/pile_type = "deck"
 
 [node name="waste" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(322, 120)
+position = Vector2(864, 2184)
 metadata/pile_type = "waste"
 
 [node name="foundation1" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(576, 120)
+position = Vector2(224, 208)
 metadata/pile_type = "foundation"
 
 [node name="foundation2" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(704, 120)
+position = Vector2(440, 208)
 metadata/pile_type = "foundation"
 
 [node name="foundation3" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(832, 120)
+position = Vector2(656, 208)
 metadata/pile_type = "foundation"
 
 [node name="foundation4" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(960, 120)
+position = Vector2(872, 208)
 metadata/pile_type = "foundation"
 
 [node name="tableau1" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(192, 307)
+position = Vector2(160, 584)
 metadata/pile_type = "tableau"
 
 [node name="tableau2" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(322, 307)
+position = Vector2(160, 800)
 metadata/pile_type = "tableau"
 
 [node name="tableau3" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(448, 307)
+position = Vector2(160, 1016)
 metadata/pile_type = "tableau"
 
 [node name="tableau4" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(576, 307)
+position = Vector2(160, 1232)
 metadata/pile_type = "tableau"
 
 [node name="tableau5" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(704, 307)
+position = Vector2(160, 1448)
 metadata/pile_type = "tableau"
 
 [node name="tableau6" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(832, 307)
+position = Vector2(160, 1664)
 metadata/pile_type = "tableau"
 
 [node name="tableau7" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(960, 307)
+position = Vector2(160, 1880)
 metadata/pile_type = "tableau"

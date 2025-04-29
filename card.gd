@@ -13,13 +13,12 @@ func setup(value, suit):
 
 func _ready() -> void:
 	var viewport = get_viewport()
-	viewport.physics_object_picking_sort = true
-	viewport.physics_object_picking_first_only = true
+	#viewport.physics_object_picking_sort = true
+	#viewport.physics_object_picking_first_only = true
 	$Area2D.input_event.connect(_on_area2d_input_event)
 
 func _on_area2d_input_event(viewport, event, shape_idx):
-	if (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed) or \
-	   (event is InputEventScreenTouch and event.pressed):
+	if (event is InputEventScreenTouch and event.pressed):
 		get_viewport().set_input_as_handled()
 
 		if !self.is_face_up:
@@ -28,7 +27,7 @@ func _on_area2d_input_event(viewport, event, shape_idx):
 				var waste = get_node("/root/Main/waste")
 				var target = waste.last_child()
 
-				self.position.y = 0
+				self.position.x = 0
 				
 				target.append_child(self)
 			return
@@ -54,10 +53,10 @@ func set_child(card):
 		card.parent.turn_up()
 
 	if self.parent_pile.get_meta("pile_type") == "foundation":
-		card.position.y = 0
+		card.position.x = 0
 
 	if self.parent_pile.get_meta("pile_type") == "tableau":
-		card.position.y = 40
+		card.position.x = 40
 
 	append_child(card)
 

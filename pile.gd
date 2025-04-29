@@ -29,7 +29,7 @@ func set_child(card):
 	if card.parent != card.parent_pile:
 		card.parent.turn_up()
 
-	card.position.y = 0
+	card.position.x = 0
 	append_child(card)
 	
 func append_child(card):
