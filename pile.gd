@@ -13,8 +13,24 @@ func _on_area2d_input_event(viewport, event, shape_idx):
 		get_viewport().set_input_as_handled()
 		
 		if self.get_meta("pile_type") == "deck":
-			pass
-		
+			var waste = get_node("/root/Main/waste")
+			var target = waste.last_child()
+
+			while target != waste:				
+				print(target.parent)
+#
+				target.turn_down()
+				target.parent.remove_child(target)
+				self.add_child(target)
+				
+				self.last_child().child = target
+				var old_parent = target.parent
+
+				target.set_parent(self)
+				target.set_parent_pile(self)
+#
+				target = old_parent
+
 		var main = get_node("/root/Main")
 
 		if main.card_selected == null:
@@ -47,3 +63,11 @@ func validate_new_child(new_child):
 	
 	return false
 	
+func last_child():
+	var target = self
+
+	while true:
+		if target.child == null:
+			return target
+		
+		target = target.child
