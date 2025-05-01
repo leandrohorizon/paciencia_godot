@@ -6,7 +6,7 @@ var card_selected = null
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	create_deck()
-	#deck.shuffle()
+	deck.shuffle()
 	deliver_cards()
 
 func create_deck() -> void:
