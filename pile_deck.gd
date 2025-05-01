@@ -15,17 +15,8 @@ func _on_area2d_input_event(viewport, event, shape_idx):
 		
 		var waste = get_node("/root/Main/waste")
 		var source = waste.last_child()
-		
+
 		pegar_de_volta_carta_pai(source, self)
-
-	var main = get_node("/root/Main")
-
-	if main.card_selected == null:
-		return
-	
-	var card = main.card_selected
-	self.set_child(card)
-	main.card_selected = null
 
 func pegar_de_volta_carta_pai(child, new_parent):
 	if child == get_node("/root/Main/waste"):
@@ -47,15 +38,19 @@ func set_child(card):
 
 func append_child(card):
 	card.parent.remove_child(card)
-	self.add_child(card)
-	
-	print("parent: ", self)
-	print("parent_pile: ", self)
-
-	self.child = card
 	card.parent.child = null
+
+	self.add_child(card)
+	self.child = card
+
+	#print("parent: ", self)
+	#print("parent_pile: ", self)
+
 	card.set_parent(self)
 	card.set_parent_pile(self)
+	
+	print("self: ", self)
+	print("card: ", card)
 
 func last_child():
 	var target = self

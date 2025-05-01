@@ -62,13 +62,11 @@ func set_child(card):
 
 func append_child(card):
 	card.parent.remove_child(card)
-	self.add_child(card)
-	
-	print("parent: ", self)
-	print("parent_pile: ", self.parent_pile)
-
-	self.child = card
 	card.parent.child = null
+
+	self.add_child(card)
+	self.child = card
+
 	card.set_parent(self)
 	card.set_parent_pile(self.parent_pile)
 

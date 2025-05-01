@@ -8,12 +8,12 @@
 script = ExtResource("1_ig7tw")
 
 [node name="deck" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(304, 2184)
+position = Vector2(872, 2184)
 script = ExtResource("3_h2yge")
 metadata/pile_type = "deck"
 
 [node name="waste" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(864, 2184)
+position = Vector2(256, 2184)
 metadata/pile_type = "waste"
 
 [node name="foundation1" parent="." instance=ExtResource("2_0xm2m")]

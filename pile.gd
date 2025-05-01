@@ -34,16 +34,13 @@ func set_child(card):
 	
 func append_child(card):
 	card.parent.remove_child(card)
-	self.add_child(card)
-	
-	print("parent: ", self)
-	print("parent_pile: ", self)
-
-	self.child = card
 	card.parent.child = null
+
+	self.add_child(card)
+	self.child = card
+
 	card.set_parent(self)
 	card.set_parent_pile(self)
-	
 
 func validate_new_child(new_child):
 	if self.get_meta("pile_type") == "foundation":
@@ -62,3 +59,5 @@ func last_child():
 			return target
 		
 		target = target.child
+	
+	return target

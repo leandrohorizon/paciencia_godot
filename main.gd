@@ -6,7 +6,7 @@ var card_selected = null
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	create_deck()
-	deck.shuffle()
+	#deck.shuffle()
 	deliver_cards()
 
 func create_deck() -> void:
@@ -58,9 +58,21 @@ func deliver_in_deck() -> void:
 	var target = $deck
 	
 	for card in deck:
+		#target.add_child(card)
+		#target.child = card
+		#card.set_parent_pile($deck)
+		#card.set_parent(target)
+		#target = card
+
 		target.add_child(card)
-		card.set_parent_pile($deck)
+		target.child = card
+
+		#print("parent: ", target)
+		#print("parent_pile: ", target)
+
 		card.set_parent(target)
+		card.set_parent_pile($deck)
+		
 		target = card
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
