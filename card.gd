@@ -12,7 +12,7 @@ func setup(value, suit):
 	self.suit = suit
 
 func _ready() -> void:
-	var viewport = get_viewport()
+	#var viewport = get_viewport()
 	#viewport.physics_object_picking_sort = true
 	#viewport.physics_object_picking_first_only = true
 	$Area2D.input_event.connect(_on_area2d_input_event)
@@ -20,28 +20,45 @@ func _ready() -> void:
 func _on_area2d_input_event(viewport, event, shape_idx):
 	if (event is InputEventScreenTouch and event.pressed):
 		get_viewport().set_input_as_handled()
-
-		if !self.is_face_up:
-			if self.parent_pile.get_meta("pile_type") == "deck":
-				self.turn_up()
-				var waste = get_node("/root/Main/waste")
-				var target = waste.last_child()
-
-				self.position.x = 0
-				
-				target.append_child(self)
-			return
-
-		print("Objeto clicado: ", self.to_str())
 		
-		var main = get_node("/root/Main")
+		if self.is_face_up:
+			slaoq()
+			return;
 
-		if main.card_selected == null:
-			main.card_selected = self
-		else:
-			var card = main.card_selected
-			self.set_child(card)
-			main.card_selected = null
+		if self.parent_pile.get_meta("pile_type") == "deck":
+			self.turn_up()
+			var waste = get_node("/root/Main/waste")
+			var target = waste.last_child()
+
+			self.position.x = 0
+			
+			target.append_child(self)
+
+func slaoq():
+	var piles = foundations()
+	piles.append_array(tableaus())
+
+	for pile in piles:
+		var pile_path = "/root/Main/" + pile
+		var pile_node = get_node(pile_path)
+		
+		var new_parent = pile_node.last_child()
+		
+		if new_parent.validate_new_child(self):
+			new_parent.set_child(self)
+			return
+	
+func foundations() -> Array:
+	return [
+		"foundation1", "foundation2", "foundation3", "foundation4"
+	]
+
+func tableaus() -> Array:
+	return [
+		"tableau1", "tableau2", "tableau3",
+		"tableau4", "tableau5", "tableau6",
+		"tableau7"
+	]
 
 func set_child(card):
 	print(self.to_str(), " > ", card.to_str(), " = ", validate_new_child(card))

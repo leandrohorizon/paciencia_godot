@@ -44,7 +44,7 @@ func append_child(card):
 
 func validate_new_child(new_child):
 	if self.get_meta("pile_type") == "foundation":
-		return new_child.value == 1
+		return new_child.value == 1 && new_child.child == null
 	
 	if self.get_meta("pile_type") == "tableau":
 		return new_child.value == 13
