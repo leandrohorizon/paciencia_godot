@@ -12,9 +12,6 @@ func setup(value, suit):
 	self.suit = suit
 
 func _ready() -> void:
-	#var viewport = get_viewport()
-	#viewport.physics_object_picking_sort = true
-	#viewport.physics_object_picking_first_only = true
 	$Area2D.input_event.connect(_on_area2d_input_event)
 
 func _on_area2d_input_event(viewport, event, shape_idx):
@@ -22,7 +19,7 @@ func _on_area2d_input_event(viewport, event, shape_idx):
 		get_viewport().set_input_as_handled()
 		
 		if self.is_face_up:
-			slaoq()
+			auto_stack_self()
 			return;
 
 		if self.parent_pile.get_meta("pile_type") == "deck":
@@ -34,7 +31,7 @@ func _on_area2d_input_event(viewport, event, shape_idx):
 			
 			target.append_child(self)
 
-func slaoq():
+func auto_stack_self():
 	var piles = foundations()
 	piles.append_array(tableaus())
 

@@ -3,22 +3,18 @@ extends Node2D
 var child = null
 
 func _ready() -> void:
-	var viewport = get_viewport()
-	viewport.physics_object_picking_sort = true
-	viewport.physics_object_picking_first_only = true
 	$Area2D.input_event.connect(_on_area2d_input_event)
 
 func _on_area2d_input_event(viewport, event, shape_idx):
-	if (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed) or \
-	   (event is InputEventScreenTouch and event.pressed):
+	if (event is InputEventScreenTouch and event.pressed):
 		get_viewport().set_input_as_handled()
 		
 		var waste = get_node("/root/Main/waste")
 		var source = waste.last_child()
 
-		pegar_de_volta_carta_pai(source, self)
+		restore_card_stack (source, self)
 
-func pegar_de_volta_carta_pai(child, new_parent):
+func restore_card_stack (child, new_parent):
 	if child == get_node("/root/Main/waste"):
 		return
 
@@ -30,7 +26,7 @@ func pegar_de_volta_carta_pai(child, new_parent):
 	child = old_parent
 
 	if child != null:
-		pegar_de_volta_carta_pai(child, old_child)
+		restore_card_stack (child, old_child)
 
 func set_child(card):
 	card.turn_down()
