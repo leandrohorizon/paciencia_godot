@@ -6,8 +6,7 @@ var card_selected = null
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	create_deck()
-	deck.shuffle()
-	deliver_cards()
+	start_game()
 
 func create_deck() -> void:
 	var suits = ["hearts", "diamonds", "clubs", "spades"]
@@ -16,9 +15,12 @@ func create_deck() -> void:
 	for suit in suits:
 		for value in values:
 			var card = preload("res://card.tscn").instantiate()
-			card.turn_down()
 			card.setup(value, suit)
 			deck.append(card)
+
+func start_game():
+	deck.shuffle()
+	deliver_cards()
 
 func deliver_cards() -> void:
 	deliver_in_tableaus();
@@ -37,20 +39,21 @@ func deliver_in_tableaus() -> void:
 		var target = tableau
 
 		for index in range(0, quantity):
-			var card = deck.pop_back()
-
-			target.add_child(card)
-			target.child = card
-
-			card.set_parent_pile(tableau)
-			card.set_parent(target)
+			var card = deck.pop_front()
 
 			if index > 0:
 				card.position.x = 25
+			else:
+				card.position.x = 0
 
 			if index == quantity - 1:
 				card.turn_up()
-			
+			else:
+				card.turn_down()
+
+			target.append_child(card)
+
+			deck.append(card)
 			target = card
 		
 		quantity = quantity + 1
@@ -58,15 +61,10 @@ func deliver_in_tableaus() -> void:
 func deliver_in_deck() -> void:
 	var target = $deck
 	
-	for card in deck:
-		target.add_child(card)
-		target.child = card
-
-		card.set_parent(target)
-		card.set_parent_pile($deck)
+	for card in deck.slice(0, 24):
+		
+		card.position.x = 0
+		card.turn_down()
+		target.append_child(card)
 		
 		target = card
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
