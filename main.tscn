@@ -1,19 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://o7wyi6t7b23g"]
+[gd_scene load_steps=6 format=3 uid="uid://o7wyi6t7b23g"]
 
 [ext_resource type="Script" uid="uid://bgbayvrt88x3k" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cdvvg7tfyf6ci" path="res://pile.tscn" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://cjta5rukj8j0l" path="res://pile_deck.gd" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://odg1mknx0onh" path="res://button.tscn" id="4_lquwl"]
+[ext_resource type="Script" uid="uid://cc8uotcd3kctm" path="res://reset.gd" id="5_7mycd"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ig7tw")
 
 [node name="deck" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(416, 2128)
+position = Vector2(664, 2136)
 script = ExtResource("3_h2yge")
 metadata/pile_type = "deck"
 
 [node name="waste" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(168, 2128)
+position = Vector2(416, 2136)
 metadata/pile_type = "waste"
 
 [node name="foundation1" parent="." instance=ExtResource("2_0xm2m")]
@@ -65,3 +67,10 @@ metadata/pile_type = "tableau"
 z_index = 6
 position = Vector2(168, 1760)
 metadata/pile_type = "tableau"
+
+[node name="reset" parent="." instance=ExtResource("4_lquwl")]
+position = Vector2(168, 2136)
+script = ExtResource("5_7mycd")
+
+[node name="undo" parent="." instance=ExtResource("4_lquwl")]
+position = Vector2(912, 2136)
