@@ -59,8 +59,8 @@ func tableaus() -> Array:
 
 func set_child(card):
 	print(self.to_str(), " > ", card.to_str(), " = ", validate_new_child(card))
-	
-	if !validate_new_child(card):
+		
+	if  !validate_new_child(card):
 		return
 
 	if card.parent != card.parent_pile:
@@ -74,17 +74,10 @@ func set_child(card):
 
 	append_child(card)
 
-func append_child(card):
-	card.parent.remove_child(card)
-	card.parent.child = null
-
-	self.add_child(card)
-	self.child = card
-
-	card.set_parent(self)
-	card.set_parent_pile(self.parent_pile)
-
 func validate_new_child(new_child):
+	if self.child != null:
+		return false
+
 	if parent_pile.get_meta("pile_type") == "foundation" && new_child.child == null:
 		var valid_value = self.value + 1
 
@@ -102,9 +95,26 @@ func suit_color():
 		"diamonds", "hearts":
 			return "red"
 
+func append_child(card):
+	card.set_parent(self)
+	card.set_parent_pile(self.parent_pile)
+
+	self.add_child(card)
+	self.child = card
+
 func set_parent(parent):
+	remove_parent()
 	self.parent = parent
 	
+func remove_parent():
+	if self.parent == null:
+		return
+
+	self.parent.remove_child(self)
+
+	if self.parent.child == self:
+		self.parent.child = null
+
 func set_parent_pile(pile):
 	self.parent_pile = pile
 

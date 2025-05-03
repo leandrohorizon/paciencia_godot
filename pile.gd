@@ -23,16 +23,16 @@ func set_child(card):
 	append_child(card)
 	
 func append_child(card):
-	card.parent.remove_child(card)
-	card.parent.child = null
+	card.set_parent(self)
+	card.set_parent_pile(self)
 
 	self.add_child(card)
 	self.child = card
 
-	card.set_parent(self)
-	card.set_parent_pile(self)
-
 func validate_new_child(new_child):
+	if self.child != null:
+		return false
+	
 	if self.get_meta("pile_type") == "foundation":
 		return new_child.value == 1 && new_child.child == null
 	
@@ -44,10 +44,7 @@ func validate_new_child(new_child):
 func last_child():
 	var target = self
 
-	while true:
-		if target.child == null:
-			return target
-		
+	while target.child != null:
 		target = target.child
 	
 	return target
