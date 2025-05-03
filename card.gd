@@ -73,7 +73,7 @@ func set_child(card):
 		card.position.x = 0
 
 	if self.parent_pile.get_meta("pile_type") == "tableau":
-		card.position.x = 40
+		card.position.x = 35
 
 	append_child(card)
 
@@ -88,7 +88,7 @@ func append_child(card):
 	card.set_parent_pile(self.parent_pile)
 
 func validate_new_child(new_child):
-	if parent_pile.get_meta("pile_type") == "foundation":
+	if parent_pile.get_meta("pile_type") == "foundation" && new_child.child == null:
 		var valid_value = self.value + 1
 
 		return new_child.value == valid_value && self.suit == new_child.suit

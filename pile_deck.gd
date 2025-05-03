@@ -43,14 +43,8 @@ func append_child(card):
 	self.add_child(card)
 	self.child = card
 
-	#print("parent: ", self)
-	#print("parent_pile: ", self)
-
 	card.set_parent(self)
 	card.set_parent_pile(self)
-	
-	print("self: ", self)
-	print("card: ", card)
 
 func last_child():
 	var target = self

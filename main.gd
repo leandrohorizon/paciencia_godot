@@ -44,11 +44,9 @@ func deliver_in_tableaus() -> void:
 
 			card.set_parent_pile(tableau)
 			card.set_parent(target)
-			
-			card.z_index = index + 1
 
 			if index > 0:
-				card.position.x = 10
+				card.position.x = 25
 
 			if index == quantity - 1:
 				card.turn_up()
