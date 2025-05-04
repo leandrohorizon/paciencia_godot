@@ -21,6 +21,8 @@ func create_deck() -> void:
 func start_game():
 	deck.shuffle()
 	deliver_cards()
+	var undo = get_node("/root/Main/undo")
+	undo.clear_action_stack()
 
 func deliver_cards() -> void:
 	deliver_in_tableaus();
