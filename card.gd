@@ -25,12 +25,15 @@ func _on_area2d_input_event(viewport, event, shape_idx):
 			return;
 
 		if self.parent_pile.get_meta("pile_type") == "deck":
+			var undo = get_node("/root/Main/undo")
+			undo.register_action(self)
+
 			self.turn_up()
 			var waste = get_node("/root/Main/waste")
 			var target = waste.last_child()
 
 			self.position.x = 0
-			
+
 			target.append_child(self)
 
 func auto_stack_self():
@@ -61,9 +64,12 @@ func tableaus() -> Array:
 
 func set_child(card):
 	print(self.to_str(), " > ", card.to_str(), " = ", validate_new_child(card))
-		
+
 	if  !validate_new_child(card):
 		return
+
+	var undo = get_node("/root/Main/undo")
+	undo.register_action(card)
 
 	if card.parent != card.parent_pile:
 		card.parent.turn_up()

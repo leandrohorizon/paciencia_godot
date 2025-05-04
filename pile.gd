@@ -17,13 +17,16 @@ func _on_area2d_input_event(viewport, event, shape_idx):
 func set_child(card):
 	if !validate_new_child(card):
 		return
+		
+	var undo = get_node("/root/Main/undo")
+	undo.register_action(card)
 
 	if card.parent != card.parent_pile:
 		card.parent.turn_up()
 
 	card.position.x = 0
 	append_child(card)
-	
+
 func append_child(card):
 	NodeManipulator.append_child(self, card, self)
 
