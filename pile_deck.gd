@@ -9,29 +9,24 @@ func _ready() -> void:
 func _on_area2d_input_event(viewport, event, shape_idx):
 	if (event is InputEventScreenTouch and event.pressed):
 		get_viewport().set_input_as_handled()
+
+		restore_card_stack()
+
+func restore_card_stack():
+	var waste = get_node("/root/Main/waste")
+	var new_child = waste.last_child()
+	var skip = false
+	
+	while(new_child != waste):
+		var undo = get_node("/root/Main/undo")
+		undo.register_action(new_child, skip)
+
+		new_child.turn_down()
+
+		self.last_child().append_child(new_child)
+		new_child = waste.last_child()
 		
-		var waste = get_node("/root/Main/waste")
-		var source = waste.last_child()
-
-		restore_card_stack (source, self)
-
-func restore_card_stack (child, new_parent):
-	if child == get_node("/root/Main/waste"):
-		return
-
-	var old_child = child
-	var old_parent = child.parent
-
-	child.turn_down()
-	new_parent.append_child(child)
-	child = old_parent
-
-	if child != null:
-		restore_card_stack (child, old_child)
-
-func set_child(card):
-	card.turn_down()
-	append_child(card)
+		skip = true
 
 func append_child(card):
 	NodeManipulator.append_child(self, card, self)
