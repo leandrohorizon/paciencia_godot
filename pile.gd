@@ -2,6 +2,8 @@ extends Node2D
 
 var child = null
 
+const NodeManipulator = preload("res://node_manipulator.gd")
+
 func _ready() -> void:
 	var viewport = get_viewport()
 	viewport.physics_object_picking_sort = true
@@ -23,11 +25,7 @@ func set_child(card):
 	append_child(card)
 	
 func append_child(card):
-	card.set_parent(self)
-	card.set_parent_pile(self)
-
-	self.add_child(card)
-	self.child = card
+	NodeManipulator.append_child(self, card, self)
 
 func validate_new_child(new_child):
 	if self.child != null:

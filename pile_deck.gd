@@ -1,6 +1,7 @@
 extends Node2D
 
 var child = null
+const NodeManipulator = preload("res://node_manipulator.gd")
 
 func _ready() -> void:
 	$Area2D.input_event.connect(_on_area2d_input_event)
@@ -33,11 +34,7 @@ func set_child(card):
 	append_child(card)
 
 func append_child(card):
-	card.set_parent(self)
-	card.set_parent_pile(self)
-
-	self.add_child(card)
-	self.child = card
+	NodeManipulator.append_child(self, card, self)
 
 func last_child():
 	var target = self

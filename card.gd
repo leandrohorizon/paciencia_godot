@@ -7,6 +7,8 @@ var parent = null
 var child = null
 var parent_pile = null
 
+const NodeManipulator = preload("res://node_manipulator.gd")
+
 func setup(value, suit):
 	self.value = value
 	self.suit = suit
@@ -96,24 +98,7 @@ func suit_color():
 			return "red"
 
 func append_child(card):
-	card.set_parent(self)
-	card.set_parent_pile(self.parent_pile)
-
-	self.add_child(card)
-	self.child = card
-
-func set_parent(parent):
-	remove_parent()
-	self.parent = parent
-	
-func remove_parent():
-	if self.parent == null:
-		return
-
-	self.parent.remove_child(self)
-
-	if self.parent.child == self:
-		self.parent.child = null
+	NodeManipulator.append_child(self, card)
 
 func set_parent_pile(pile):
 	self.parent_pile = pile
