@@ -7,74 +7,86 @@ var parent = null
 var child = null
 var parent_pile = null
 
+const NodeManipulator = preload("res://node_manipulator.gd")
+
 func setup(value, suit):
 	self.value = value
 	self.suit = suit
 
 func _ready() -> void:
-	var viewport = get_viewport()
-	viewport.physics_object_picking_sort = true
-	viewport.physics_object_picking_first_only = true
 	$Area2D.input_event.connect(_on_area2d_input_event)
 
 func _on_area2d_input_event(viewport, event, shape_idx):
-	if (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed) or \
-	   (event is InputEventScreenTouch and event.pressed):
+	if (event is InputEventScreenTouch and event.pressed):
 		get_viewport().set_input_as_handled()
-
-		if !self.is_face_up:
-			if self.parent_pile.get_meta("pile_type") == "deck":
-				self.turn_up()
-				var waste = get_node("/root/Main/waste")
-				var target = waste.last_child()
-
-				self.position.y = 0
-				
-				target.append_child(self)
-			return
-
-		print("Objeto clicado: ", self.to_str())
 		
-		var main = get_node("/root/Main")
+		if self.is_face_up:
+			auto_stack_self()
+			return;
 
-		if main.card_selected == null:
-			main.card_selected = self
-		else:
-			var card = main.card_selected
-			self.set_child(card)
-			main.card_selected = null
+		if self.parent_pile.get_meta("pile_type") == "deck":
+			var undo = get_node("/root/Main/undo")
+			undo.register_action(self)
+
+			self.turn_up()
+			var waste = get_node("/root/Main/waste")
+			var target = waste.last_child()
+
+			self.position.x = 0
+
+			target.append_child(self)
+
+func auto_stack_self():
+	var piles = foundations()
+	piles.append_array(tableaus())
+
+	for pile in piles:
+		var pile_path = "/root/Main/" + pile
+		var pile_node = get_node(pile_path)
+		
+		var new_parent = pile_node.last_child()
+		
+		if new_parent.validate_new_child(self):
+			new_parent.set_child(self)
+			return
+	
+func foundations() -> Array:
+	return [
+		"foundation1", "foundation2", "foundation3", "foundation4"
+	]
+
+func tableaus() -> Array:
+	return [
+		"tableau1", "tableau2", "tableau3",
+		"tableau4", "tableau5", "tableau6",
+		"tableau7"
+	]
 
 func set_child(card):
 	print(self.to_str(), " > ", card.to_str(), " = ", validate_new_child(card))
-	
-	if !validate_new_child(card):
+
+	if  !validate_new_child(card):
 		return
+
+	var undo = get_node("/root/Main/undo")
+	undo.register_action(card)
 
 	if card.parent != card.parent_pile:
 		card.parent.turn_up()
 
 	if self.parent_pile.get_meta("pile_type") == "foundation":
-		card.position.y = 0
+		card.position.x = 0
 
 	if self.parent_pile.get_meta("pile_type") == "tableau":
-		card.position.y = 40
+		card.position.x = 35
 
 	append_child(card)
 
-func append_child(card):
-	card.parent.remove_child(card)
-	self.add_child(card)
-	
-	print("parent: ", self)
-	print("parent_pile: ", self.parent_pile)
-
-	self.child = card
-	card.parent.child = null
-	card.set_parent(self)
-	card.set_parent_pile(self.parent_pile)
-
 func validate_new_child(new_child):
-	if parent_pile.get_meta("pile_type") == "foundation":
+	if self.child != null:
+		return false
+
+	if parent_pile.get_meta("pile_type") == "foundation" && new_child.child == null:
 		var valid_value = self.value + 1
 
 		return new_child.value == valid_value && self.suit == new_child.suit
@@ -91,9 +103,9 @@ func suit_color():
 		"diamonds", "hearts":
 			return "red"
 
-func set_parent(parent):
-	self.parent = parent
-	
+func append_child(card):
+	NodeManipulator.append_child(self, card)
+
 func set_parent_pile(pile):
 	self.parent_pile = pile
 

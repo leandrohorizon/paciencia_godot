@@ -1,61 +1,78 @@
-[gd_scene load_steps=4 format=3 uid="uid://o7wyi6t7b23g"]
+[gd_scene load_steps=7 format=3 uid="uid://o7wyi6t7b23g"]
 
 [ext_resource type="Script" uid="uid://bgbayvrt88x3k" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cdvvg7tfyf6ci" path="res://pile.tscn" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://cjta5rukj8j0l" path="res://pile_deck.gd" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://odg1mknx0onh" path="res://button.tscn" id="4_lquwl"]
+[ext_resource type="Script" uid="uid://cc8uotcd3kctm" path="res://reset.gd" id="5_7mycd"]
+[ext_resource type="Script" uid="uid://pu3tvtb70q88" path="res://undo.gd" id="6_7mycd"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ig7tw")
 
 [node name="deck" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(192, 120)
+position = Vector2(664, 2136)
 script = ExtResource("3_h2yge")
 metadata/pile_type = "deck"
 
 [node name="waste" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(322, 120)
+position = Vector2(416, 2136)
 metadata/pile_type = "waste"
 
 [node name="foundation1" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(576, 120)
+position = Vector2(168, 312)
 metadata/pile_type = "foundation"
 
 [node name="foundation2" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(704, 120)
+position = Vector2(416, 312)
 metadata/pile_type = "foundation"
 
 [node name="foundation3" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(832, 120)
+position = Vector2(664, 312)
 metadata/pile_type = "foundation"
 
 [node name="foundation4" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(960, 120)
+position = Vector2(912, 312)
 metadata/pile_type = "foundation"
 
 [node name="tableau1" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(192, 307)
+position = Vector2(168, 680)
 metadata/pile_type = "tableau"
 
 [node name="tableau2" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(322, 307)
+z_index = 1
+position = Vector2(168, 860)
 metadata/pile_type = "tableau"
 
 [node name="tableau3" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(448, 307)
+z_index = 2
+position = Vector2(168, 1040)
 metadata/pile_type = "tableau"
 
 [node name="tableau4" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(576, 307)
+z_index = 3
+position = Vector2(168, 1220)
 metadata/pile_type = "tableau"
 
 [node name="tableau5" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(704, 307)
+z_index = 4
+position = Vector2(168, 1400)
 metadata/pile_type = "tableau"
 
 [node name="tableau6" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(832, 307)
+z_index = 5
+position = Vector2(168, 1580)
 metadata/pile_type = "tableau"
 
 [node name="tableau7" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(960, 307)
+z_index = 6
+position = Vector2(168, 1760)
 metadata/pile_type = "tableau"
+
+[node name="reset" parent="." instance=ExtResource("4_lquwl")]
+position = Vector2(168, 2136)
+script = ExtResource("5_7mycd")
+
+[node name="undo" parent="." instance=ExtResource("4_lquwl")]
+position = Vector2(912, 2136)
+script = ExtResource("6_7mycd")
